@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+<!-- fullname -->
+<!-- email -->
+<!-- phone -->
+<!-- password -->
+</head>
+<body>
+    <form action="/login" method="post" autocomplete="on">
+
+        <label for="fullName">Full Name</label>
+        <input type="text" placeholder="fullname" >
+
+        <label for="email">email</label>
+        <input type="email">
+
+        <label for="phone">Phone</label>
+        <input type="number">
+
+        <label for="password">password</label>
+        <input type="password" name="password" id="password">
+        
+        <button type="submit" id="submitDetails">Submit Your Details</button><br>
+    </form>
+</body>
+</html>

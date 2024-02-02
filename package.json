@@ -1,0 +1,21 @@
+{
+  "name": "loginpage",
+  "version": "1.0.0",
+  "description": "Creating a login page with Node.js, MongoDB, Express and Ejs ",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon index.js"
+  },
+  "author": "Gideon-Buba",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
