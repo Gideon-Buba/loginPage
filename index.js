@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose")
+const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const path = require("path");
 const User = require("./models/user")
@@ -10,6 +11,7 @@ const app = express()
 const port = 3000
 const uri = "mongodb://localhost:27017/"
 
+app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -38,35 +40,20 @@ async function getHash(password) {
     })
 }
 
-app.post('/login', async (req, res) => {
 
-    try {
-        const user = User.create({...req.body})
-        res.json({ message : "sign up succesful" })
-    }
-
-    // const password = req.body.password
-    
-    // const hashedPassword = getHash(password)
-
-    // try {
-    //     const user = new User({
-    //             fullname: "Gideon Buba",
-    //             email: "bubaambore@gmail.com",
-    //             phone: +2348187909619,
-    //             password: hashedPassword
-    //         });
-
-    //         const result = await user.save()
-     catch(error) {
-        console.log(error)
-        res.status(500).send("Internal Server error")
-    }
-
+app.get("/", (req, res) => {
+    res.render("signup")
 })
 
+app.get("/login", (req, res) => {
+    res.render("login")
+})
 
+// 404 page
 
+app.use((req, res) => {
+    res.status(404).render("404")
+})
 
 connectToDb().then(() => {
     app.listen(port, () => {
