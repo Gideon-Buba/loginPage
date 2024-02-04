@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require('express-session')
 const mongoose = require("mongoose")
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
@@ -14,6 +15,14 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+    session({
+        secret: "12345", 
+        resave: false,
+        saveUninitialized: true
+    })
+);
 
 
 async function connectToDb() {
@@ -32,7 +41,6 @@ function getHash(password) {
 
             bcrypt.hash(password, salt, (err, hashedPassword) => {
                 if(err) return reject(err);
-                console.log({ hashedPassword, err})
                 return resolve(hashedPassword);
             })
         })
@@ -49,7 +57,6 @@ app.post("/signup", async(req, res) => {
 
         // Hash the password before storing it
         const hashedPassword = await getHash(password);
-        console.log({ hashedPassword, password })
 
         // Create a new user instance with the hashed password
         const newUser = new User({
@@ -88,6 +95,9 @@ app.post("/login", async (req, res) => {
 
         // Check if the user exists and the password is correct
         if (user && await bcrypt.compare(password, user.password)) {
+
+            req.session.user = { name : user.name }
+
             // Redirect to a dashboard or home page after successful login
             res.redirect("/dashboard");
         } else {
@@ -102,6 +112,18 @@ app.post("/login", async (req, res) => {
         })
     }
 })
+
+app.get("/dashboard", (req, res) => {
+    // Check if the user is logged in
+    if (req.session.user) {
+        const { name } = req.session.user;
+        // Render the dashboard with the welcome message
+        return res.render("dashboard", { title: "Dashboard", name });
+    } else {
+        // Redirect to the login page if the user is not logged in
+        return res.redirect("/login");
+    }
+});
 
 
 connectToDb().then(() => {
