@@ -3,36 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title> <%= title %> </title>
     <%-
         '<style>'
         + include("./style.css")
         + '</style>'
     %>
+
 </head>
 <body>
     <div class="container">
         <div class="form_area">
             <p class="title">SIGN UP</p>
-            <form action="">
+            <form action="/signup" method="POST">
                 <div class="form_group">
-                    <label class="sub_title" for="name">Name</label>
-                    <input placeholder="Enter your full name" class="form_style" type="text">
+                    <label class="sub_title" for="fullname">Full Name</label>
+                    <input name="name" placeholder="Enter your full name" class="form_style" type="text">
                 </div>
                 <div class="form_group">
                     <label class="sub_title" for="email">Email</label>
-                    <input placeholder="Enter your email" id="email" class="form_style" type="email">
+                    <input name="email" placeholder="Enter your email" id="email" class="form_style" type="email">
                 </div>
                 <div class="form_group">
                     <label class="sub_title" for="password">Password</label>
                     <input name="password" placeholder="Enter your password" id="password" class="form_style" type="password">
                 </div>
-                <div>
-                    <button class="btn">SIGN UP</button>
-                    <p>Have an Account? <a class="link" href="">Login Here!</a></p><a class="link" href="/login">
-                </a></div><a class="link" href="">
-            
-        </a></form></div><a class="link" href="">
-    </a></div>
+               
+                <button class="btn">SIGN UP</button>
+                <p>Have an Account? <a class="link" href="./login">Login Here!</a></p>
+                
+            </form>
+        </div>
+    </div>
 </body>
 </html>

@@ -14,25 +14,27 @@
     <div class="container">
         <div class="form_area">
             <p class="title">LOG IN</p>
-            <form action="">
+            <form action="/login" method="POST">
                 <div class="form_group">
+                    <% if(email_error) { %>
+                        <span style="color: red;">Please input correct email</span>
+                    <% } %>
                     <label class="sub_title" for="name">Name</label>
-                    <input placeholder="Enter your full name" class="form_style" type="text">
+                    <input name="email" placeholder="Enter your full name" class="form_style" type="email">
                 </div>
-                <!-- <div class="form_group">
-                    <label class="sub_title" for="email">Email</label>
-                    <input placeholder="Enter your email" id="email" class="form_style" type="email">
-                </div> -->
                 <div class="form_group">
+                    <% if(password_error) { %>
+                        <span style="color: red;">Please input correct password</span>
+                    <% } %>
                     <label class="sub_title" for="password">Password</label>
                     <input name="password" placeholder="Enter your password" id="password" class="form_style" type="password">
                 </div>
                 <div>
                     <button class="btn">LOGIN</button>
-                    <p>Don't have an Account? <a class="link" href="">Sign up Here!</a></p><a class="link" href="/signup">
-                </a></div><a class="link" href="">
+                    <p>Don't have an Account? <a class="link" href="/">Sign up Here!</a></p>
+                </div>
             
-        </a></form></div><a class="link" href="">
-    </a></div>
+        </form></div>
+    </div>
 </body>
 </html>
